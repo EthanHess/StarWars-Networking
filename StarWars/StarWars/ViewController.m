@@ -12,12 +12,13 @@
 #import "Planet.h"
 #import "Person.h"
 
-@interface ViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface ViewController () <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *planetArray;
 @property (nonatomic, strong) NSArray *personArray;
-@property (nonnull, strong) UISegmentedControl *segController;
+@property (nonatomic, strong) UISegmentedControl *segController;
+@property (nonatomic, strong) UISearchBar *searchBar;
 
 //add segmented control to make different API calls then have option to filter array with predicate
 
@@ -34,11 +35,19 @@
 //        
 //    });
 
-    
+    [self setUpSearchBar];
     
     [self setUpTableView];
     
     [self setUpSegController];
+}
+
+- (void)setUpSearchBar {
+    
+    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(50, 110, self.view.frame.size.width - 100, 80)];
+    self.searchBar.delegate = self;
+    [self.view addSubview:self.searchBar];
+    
 }
 
 - (void)setUpSegController {
@@ -123,6 +132,24 @@
         }]; 
     }
      
+}
+
+#pragma Search Bar Del. 
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    
+    NSString *searchText = searchBar.text;
+    
+    if (self.segController.selectedSegmentIndex == 0) {
+        
+        //create name of people and planets then filter with nspredicate
+        
+        
+    } else if (self.segController.selectedSegmentIndex == 1) {
+        
+
+    }
+    
 }
 
 - (void)refresh {
